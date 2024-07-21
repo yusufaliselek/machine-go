@@ -1,0 +1,21 @@
+/* NotFound.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: linear-gradient(#fff6e8, #fff);
+  color: rgba(0, 0, 0, 0.88);
+}
+
+.title {
+  font-size: 6em;
+  margin: 0;
+}
+
+.message {
+  font-size: 1.5em;
+  margin: 20px 0;
+}
