@@ -133,7 +133,7 @@ table {
 }
 
 :root {
-	--color-main: #feb111;
+	--color-main: rgb(254, 177, 17);
 	--color-main-dark: #ef9904;
 	--color-main-light: #fec74f;
 }
@@ -164,4 +164,22 @@ table {
 	background-color: #fff6e8 !important;
 	border: 1px solid #fff6e8 !important;
 	color: #000 !important;
+}
+
+
+.ant-input-primary:hover {
+	background-color: var(--color-main-light) !important;
+	border-color: var(--color-main-light) !important;
+	color: #000000 !important;
+}
+
+/* MachineList.css */
+
+.ant-input-search .ant-input:hover {
+  border-color: var(--color-main); /* Hover durumundaki border rengi */
+}
+
+.ant-input-search .ant-input:focus {
+  border-color: var(--color-main);; /* Focus durumundaki border rengi */
+  box-shadow: 0 0 0 2px rgba(254, 177, 17, 0.2); /* Focus durumundaki box-shadow rengi */
 }

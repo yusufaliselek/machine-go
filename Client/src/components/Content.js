@@ -2,11 +2,7 @@ import React from 'react'
 import Navbar from './Navbar'
 import '../styles/Content.css'
 
-const Content = ({
-  pageName,
-  children,
-  ...props
-}) => {
+const Content = ({ pageName, children }) => {
   return (
     <div className='content-main'>
       <Navbar pageName={pageName} />

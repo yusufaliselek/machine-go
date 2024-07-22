@@ -57,3 +57,57 @@
   font-size: .9rem;
   margin-bottom: 1.5rem;
 }
+
+@media screen and (max-width: 1200px) {
+  .hero-section-header {
+    font-size: 1.5rem;
+  }
+
+  .hero-section-paragraph {
+    font-size: 1rem;
+  }
+
+  .section-header {
+    font-size: 1rem;
+  }
+
+  .section-paragraph {
+    font-size: .8rem;
+  }
+
+  .detail-section {
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 968px) {
+  .hero-section-header {
+    font-size: 1.2rem;
+  }
+
+  .hero-section-paragraph {
+    font-size: .9rem;
+  }
+
+  .section-header {
+    font-size: .9rem;
+  }
+
+  .section-paragraph {
+    font-size: .7rem;
+  }
+
+  .detail-section {
+    gap: .5rem;
+  }
+  
+}
+
+@media screen and (max-width: 850px) {
+  .detail-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+  }
+}
