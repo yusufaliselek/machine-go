@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Navbar.css';
-import logo from '../assets/logo.png';
+import logo from '../assets/images/logo.png';
 import { Button } from 'antd';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";

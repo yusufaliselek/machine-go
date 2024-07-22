@@ -142,7 +142,7 @@ table {
 	color: var(--color-main);
 }
 
-/* Ant Design Custom */
+/* Start Ant Design Override */
 .ant-btn-primary {
 	background-color: var(--color-main);
 	border-color: var(--color-main);
@@ -166,20 +166,51 @@ table {
 	color: #000 !important;
 }
 
-
 .ant-input-primary:hover {
 	background-color: var(--color-main-light) !important;
 	border-color: var(--color-main-light) !important;
 	color: #000000 !important;
 }
 
-/* MachineList.css */
-
 .ant-input-search .ant-input:hover {
-  border-color: var(--color-main); /* Hover durumundaki border rengi */
+	border-color: var(--color-main);
 }
 
 .ant-input-search .ant-input:focus {
-  border-color: var(--color-main);; /* Focus durumundaki border rengi */
-  box-shadow: 0 0 0 2px rgba(254, 177, 17, 0.2); /* Focus durumundaki box-shadow rengi */
+	border-color: var(--color-main);
+	box-shadow: 0 0 0 2px rgba(254, 177, 17, 0.2);
 }
+
+.ant-input:hover {
+	border-color: var(--color-main);
+}
+
+.ant-input:focus {
+	border-color: var(--color-main);
+	box-shadow: 0 0 0 2px rgba(254, 177, 17, 0.2);
+}
+
+.ant-select:hover,
+.ant-select-outlined:hover,
+.ant-select-item-option:hover,
+.ant-select-item-option-active,
+.ant-select-item-option-selected {
+	background-color: rgba(254, 177, 17, 0.2) !important;
+}
+
+
+.ant-select-focused .ant-select-selector,
+.ant-select-selector:hover,
+.ant-input-number:hover,
+.ant-input-number-focused,
+.ant-picker:hover,
+.ant-picker-focused {
+	border-color: var(--color-main) !important;
+	box-shadow: 0 0 0 2px rgba(254, 177, 17, 0.2) !important;
+}
+
+.ant-picker-cell-today {
+	border-color: var(--color-main) !important;
+}
+
+/* Finish Ant Design Override */

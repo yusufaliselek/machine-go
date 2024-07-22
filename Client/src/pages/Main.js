@@ -9,17 +9,17 @@ const { Meta } = Card;
 
 const cardData = [
   {
-    imgUrl: require('../assets/landing-card-1.png'),
+    imgUrl: require('../assets/images/landing-card-1.png'),
     title: 'Ekskavatörler',
     description: 'Güçlü ve dayanıklı ekskavatörler'
   },
   {
-    imgUrl: require('../assets/landing-card-2.png'),
+    imgUrl: require('../assets/images/landing-card-2.png'),
     title: 'Kompaktörler',
     description: 'Yüksek performanslı kompaktörler'
   },
   {
-    imgUrl: require('../assets/landing-card-4.png'),
+    imgUrl: require('../assets/images/landing-card-4.png'),
     title: 'Greyderler',
     description: 'İş makinelerinin vazgeçilmezi greyderler'
   }
@@ -61,11 +61,6 @@ const Main = () => {
             </Card>
           )}
         </div>
-
-        {/* FOOTER SECTION */}
-        <footer class="site-footer">
-          
-        </footer>
 
       </div>
     } />

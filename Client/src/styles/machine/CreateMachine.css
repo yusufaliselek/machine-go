@@ -1,0 +1,41 @@
+.section-main {
+  height: calc(100vh - 61px);
+  width: 100%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.form {
+  width: 60%;
+  padding: 1rem 0;
+}
+
+.form-title {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: .5rem 0 0 0;
+}
+
+.form hr {
+  width: 100%;
+  border: .5px solid #f0f0f0be;
+}
+
+.form-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+}
+
+.form-footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+  gap: 1rem;
+}

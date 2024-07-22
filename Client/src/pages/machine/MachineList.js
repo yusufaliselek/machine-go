@@ -128,7 +128,7 @@ const MachineList = () => {
                 cover={
                   <img
                     alt={machine.description}
-                    src={require(`../../assets/landing-card-${1}.png`)}
+                    src={require(`../../assets/images/landing-card-${1}.png`)}
                   />
                 }
                 actions={[
