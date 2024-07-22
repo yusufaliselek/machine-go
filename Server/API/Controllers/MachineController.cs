@@ -17,9 +17,9 @@ namespace API.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetMachines()
+        public async Task<IActionResult> GetMachines(int pageNumber = 1, int pageSize = 10, string searchTerm = null)
         {
-            var machines = await _machineService.GetMachinesAsync();
+            var machines = await _machineService.GetMachinesAsync(pageNumber, pageSize, searchTerm);
             return Ok(machines);
         }
 

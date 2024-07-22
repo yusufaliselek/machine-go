@@ -50,9 +50,23 @@ namespace Service.Services
             return await ThrowIfMachineNotFoundAsync(id);
         }
 
-        public async Task<IEnumerable<Machine>> GetMachinesAsync()
+        public async Task<PagedResult<Machine>> GetMachinesAsync(int pageNumber, int pageSize, string? searchTerm)
         {
-            return await _machines.ToListAsync();
+            IQueryable<Machine> result = _machines;
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                result = result.Where(m => m.Status.Contains(searchTerm) || m.Description.Contains(searchTerm));
+            }
+
+            var totalCount = await result.CountAsync();
+            var machines = await result.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            return new PagedResult<Machine>
+            {
+                Items = machines,
+                TotalCount = totalCount
+            };
         }
 
         public async Task<Machine> UpdateMachineAsync(int id, UpdateMachineDto updateMachineDto)

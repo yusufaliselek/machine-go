@@ -4,23 +4,43 @@ import Content from '../../components/Content';
 import '../../styles/machine/CreateMachine.css';
 import { Button, DatePicker, Form, Input, InputNumber, Select } from 'antd';
 import categories from '../../assets/constants/categories';
+import machine from '../../api/machine';
+import Toast from '../../components/Toast';
 
 const CreateMachine = () => {
+
   const navigate = useNavigate();
 
   const [filteredSubcategories, setFilteredSubcategories] = useState([]);
+
+  const handleCategoryChange = (value) => {
+    const category = categories.find(x => x.value === value);
+    setFilteredSubcategories(category.subcategories);
+  }
 
   const onCancel = () => {
     navigate('/machine/list');
   }
 
-  const onFinish = (e) => {
-    console.log(e);
-  }
+  const onFinish = async (e) => {
 
-  const handleCategoryChange = (value) => {
-    const category = categories.find(x => x.value === value);
-    setFilteredSubcategories(category.subcategories);
+    // Zaman formatı düzenleme
+    const date = new Date(e.manufacturingDate.$d);
+    const localISOTime = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+
+    // Makine ekleme işlemi
+    try {
+
+      await machine.create({ ...e, manufacturingDate: localISOTime });
+      Toast.Success("Makine başarıyla eklendi.");
+      navigate('/machine/list');
+
+    } catch (error) {
+
+      console.log(error);
+      Toast.Error("Makine eklenirken hata oluştu.");
+
+    }
   }
 
   return (
@@ -36,13 +56,13 @@ const CreateMachine = () => {
               name="categoryId"
               rules={[{ required: true, message: 'Lütfen kategori seçiniz!' }]}
             >
-              <Select options={categories} onChange={handleCategoryChange}/>
+              <Select options={categories} onChange={handleCategoryChange} />
             </Form.Item>
 
             <Form.Item label="Alt Kategori" name="subcategoryId"
               rules={[{ required: true, message: 'Lütfen alt kategori seçiniz!' }]}
             >
-              <Select options={filteredSubcategories}/>
+              <Select options={filteredSubcategories} />
             </Form.Item>
 
             <Form.Item

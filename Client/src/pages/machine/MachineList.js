@@ -1,16 +1,24 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Content from '../../components/Content'
+import React, { useEffect, useState, Suspense, lazy } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/machine/MachineList.css';
-import { Button, Input, Drawer, Card } from 'antd';
+import { Button, Input, Drawer, Card, Pagination } from 'antd';
 import { FilterOutlined, EditOutlined, ShoppingFilled, DollarOutlined, InfoCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Tooltip } from "antd";
+import categories from '../../assets/constants/categories';
+import machine from '../../api/machine';
 
-const { Search } = Input;
+const Content = lazy(() => import('../../components/Content'));
 
 const MachineList = () => {
+
   const navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
+  const [pagination, setPagination] = useState({ page: 1, pageSize: 10, searchTerm: "" });
+  const [machines, setMachines] = useState({
+    items: [],
+    totalCount: 0
+  });
 
   const showDrawer = () => {
     setOpen(true);
@@ -20,79 +28,41 @@ const MachineList = () => {
     setOpen(false);
   };
 
-  const onSearch = value => console.log(value);
+  const onSearch = value => {
+    setPagination({ ...pagination, searchTerm: value, page: 1 }); // Arama yapıldığında sayfa 1'e dön
+  }
 
-  /* Yeni Makine Route*/
   const createMachine = () => {
     navigate('/machine/create');
   }
 
-  /* Makine Güncelle Route*/
   const updateMachine = (id) => {
     navigate(`/machine/update/${id}`);
   }
 
-  /* Makine Detay Route*/
   const rentMachine = (id) => {
     navigate(`/machine/${id}`);
   }
 
-  const machineData = [
-    {
-      id: 1,
-      categoryId: 1,
-      subCategoryId: 1,
-      manufacturingDate: new Date(),
-      status: "Kullanılmış",
-      description: "10 Tonluk X makinesi",
-      price: "1000 TL"
-    },
-    {
-      id: 2,
-      categoryId: 2,
-      subCategoryId: 2,
-      manufacturingDate: new Date(),
-      status: "Kullanılmış",
-      description: "10 Tonluk X makinesi",
-      price: "1000 TL"
-    },
-    {
-      id: 3,
-      categoryId: 3,
-      subCategoryId: 3,
-      manufacturingDate: new Date(),
-      status: "Kullanılmış",
-      description: "10 Tonluk X makinesi",
-      price: "1000 TL"
-    },
-    {
-      id: 4,
-      categoryId: 4,
-      subCategoryId: 4,
-      manufacturingDate: new Date(),
-      status: "Kullanılmış",
-      description: "10 Tonluk X makinesi",
-      price: "1000 TL"
-    },
-    {
-      id: 5,
-      categoryId: 5,
-      subCategoryId: 5,
-      manufacturingDate: new Date(),
-      status: "Kullanılmış",
-      description: "BEKO",
-      price: "1000 TL"
-    },
-    {
-      id: 6,
-      categoryId: 6,
-      subCategoryId: 6,
-      manufacturingDate: new Date(),
-      status: "Kullanılmış",
-      description: "10 Tonluk X makinesi",
-      price: "1000 TL"
-    },
-  ]
+  const getMachines = async ({ page, pageSize, searchTerm }) => {
+    try {
+      const response = await machine.list(page, pageSize, searchTerm);
+      setMachines({
+        items: response.items,
+        totalCount: response.totalCount
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getMachines(pagination);
+  }, []);
+
+  useEffect(() => {
+    getMachines(pagination);
+  }, [pagination]);
 
   const CardContentText = ({ title, content, icon }) => {
     return (
@@ -103,51 +73,74 @@ const MachineList = () => {
           <p className='card-content-content'>{content}</p>
         </div>
       </div>
-
     )
   }
 
   return (
-    <Content pageName={"Makineler"} children={
-      <div className='section-main'>
-        <div className='section-main-search'>
-          <Search placeholder="Makine Arayın" onSearch={onSearch} enterButton />
-          <Tooltip title="Filtrele"><Button type="primary" icon={<FilterOutlined />} onClick={showDrawer} style={{ padding: "0 20px" }} /></Tooltip>
-          <Tooltip title="Yeni Makine Ekle"><Button type="primary" icon={<PlusOutlined />} onClick={createMachine} style={{ padding: "0 20px" }} /></Tooltip>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Content pageName={"Makineler"} children={
+        <div className='section-main'>
+          <div className='section-main-search'>
+            <Input.Search
+              placeholder="Makine Arayın"
+              onSearch={onSearch}
+              enterButton
+            />
+            <Tooltip title="Filtrele">
+              <Button type="primary" icon={<FilterOutlined />} onClick={showDrawer} style={{ padding: "0 20px" }} />
+            </Tooltip>
+            <Tooltip title="Yeni Makine Ekle">
+              <Button type="primary" icon={<PlusOutlined />} onClick={createMachine} style={{ padding: "0 20px" }} />
+            </Tooltip>
+          </div>
+          <div className='section-main-content'>
+            <Drawer title="Makineleri Filtreleyin" onClose={onClose} open={open}>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+            </Drawer>
+            {machines.items.map((machine, index) => {
+              return (
+                <Card
+                  key={index}
+                  style={{ width: 200 }}
+                  cover={
+                    <img
+                      alt={machine.description}
+                      src={require(`../../assets/images/landing-card-${1}.png`)}
+                    />
+                  }
+                  actions={[
+                    <Tooltip title="Düzenle"><EditOutlined className='card-icon' key="setting" onClick={() => updateMachine(machine.id)} /></Tooltip>,
+                    <Tooltip title="Kirala"><ShoppingFilled className='card-icon' key="shop" onClick={() => rentMachine(machine.id)} /></Tooltip>,
+                  ]}
+                >
+                  <div className='card-content'>
+                    <h3 style={{ paddingLeft: "5px" }}>
+                      {categories.find(x => x.value === machine.categoryId)?.subcategories.find(x => x.value === machine.subcategoryId)?.label}
+                    </h3>
+                    <CardContentText title='Durum' content={machine.status} icon={<InfoCircleOutlined className='card-content-icon' />} />
+                    <CardContentText title='Fiyat' content={machine.price + " TL"} icon={<DollarOutlined className='card-content-icon' />} />
+                  </div>
+                </Card>
+              )
+            })}
+          </div>
+          <Pagination
+            style={{ marginTop: "auto", paddingBottom: "5px" }}
+            total={machines.totalCount}
+            showTotal={(total) => `Toplam ${total} Makine`}
+            current={pagination.page}
+            pageSize={pagination.pageSize}
+            pageSizeOptions={[10]}
+            showTitle={false}
+            locale={{ items_per_page: '' }}
+            onChange={(page, pageSize) => setPagination({ ...pagination, page, pageSize })}
+          />
         </div>
-        <div className='section-main-content'>
-          <Drawer title="Makineleri Filtreleyin" onClose={onClose} open={open}>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-          </Drawer>
-          {machineData.map((machine, index) => {
-            return (
-              <Card
-                style={{ width: 200 }}
-                cover={
-                  <img
-                    alt={machine.description}
-                    src={require(`../../assets/images/landing-card-${1}.png`)}
-                  />
-                }
-                actions={[
-                  <Tooltip title="Düzenle"><EditOutlined className='card-icon' key="setting" onClick={() => updateMachine(machine.id)} /></Tooltip>,
-                  <Tooltip title="Kirala"><ShoppingFilled className='card-icon' key="shop" onClick={() => rentMachine(machine.id)} /></Tooltip>,
-                ]}
-              >
-                <div className='card-content'>
-                  <h3 style={{ paddingLeft: "5px" }}>{machine.description}</h3>
-                  <CardContentText title='Durum' content={machine.status} icon={<InfoCircleOutlined className='card-content-icon' />} />
-                  <CardContentText title='Fiyat' content={machine.price} icon={<DollarOutlined className='card-content-icon' />} />
-                </div>
-              </Card>
-            )
-          })}
-        </div>
-      </div>
-    } />
+      } />
+    </Suspense>
   )
 }
 
-export default MachineList
+export default MachineList;

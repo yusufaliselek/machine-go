@@ -7,7 +7,7 @@ namespace Core.Services
     {
         Task<Machine> CreateMachineAsync(CreateMachineDto createMachineDto);
         Task<Machine> GetMachineAsync(int id);
-        Task<IEnumerable<Machine>> GetMachinesAsync();
+        Task<PagedResult<Machine>> GetMachinesAsync(int pageNumber, int pageSize, string searchTerm);
         Task<Machine> UpdateMachineAsync(int id, UpdateMachineDto updateMachineDto);
         Task DeleteMachineAsync(int id);
     }
