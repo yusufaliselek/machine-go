@@ -14,10 +14,11 @@
   padding: 20px;
   max-width: 800px;
   margin-top: 60px;
+  gap: 20px;
 }
 
 .machine-image {
-  margin-right: 20px;
+  width: 100%;
 }
 
 .thumbnail-images {
@@ -39,7 +40,7 @@
 }
 
 .machine-info {
-  max-width: 500px;
+  width: 100%;
 }
 
 h1 {

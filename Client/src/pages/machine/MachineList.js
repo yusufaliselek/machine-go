@@ -42,14 +42,11 @@ const MachineList = () => {
 
   // TreeView
   const [expandedKeys, setExpandedKeys] = useState([]);
-  const [checkedKeys, setCheckedKeys] = useState([]);
   const [autoExpandParent, setAutoExpandParent] = useState(true);
 
   // Multi Filter
-  const [priceRange, setPriceRange] = useState({
-    min: 0,
-    max: 0
-  });
+  const [priceRange, setPriceRange] = useState({ min: null, max: null });
+  const [checkedKeys, setCheckedKeys] = useState([]);
 
   const onExpand = (expandedKeysValue) => {
     setExpandedKeys(expandedKeysValue);
@@ -105,9 +102,18 @@ const MachineList = () => {
         items: response.items,
         totalCount: response.totalCount
       });
+      onClose();
     } catch (error) {
       console.log(error);
     }
+  }
+
+  const clearFilters = () => {
+    setCheckedKeys([]);
+    setPriceRange({ min: 0, max: 0 });
+    setPagination({ ...pagination, page: 1 });
+    getMachines(pagination);
+    onClose();
   }
 
   useEffect(() => {
@@ -164,7 +170,7 @@ const MachineList = () => {
                 <InputNumber
                   style={{ width: '100%' }}
                   formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                  placeholder="Minimum" step={100} onChange={value => setPriceRange({ ...priceRange, min: value })} />
+                  placeholder="Minimum" value={priceRange.min} step={100} onChange={value => setPriceRange({ ...priceRange, min: value })} />
                 <Input placeholder="~" disabled
                   style={{
                     width: '10%',
@@ -175,13 +181,13 @@ const MachineList = () => {
                 <InputNumber
                   style={{ width: '100%' }}
                   formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                  placeholder="Maksimum" step={100} onChange={value => setPriceRange({ ...priceRange, max: value })} />
+                  placeholder="Maksimum" value={priceRange.max} step={100} onChange={value => setPriceRange({ ...priceRange, max: value })} />
               </Input.Group>
             </div>
           </div>
           <br />
           <div className='drawer-actions'>
-            <Button onClick={onClose}>Sıfırla</Button>
+            <Button onClick={clearFilters}>Sıfırla</Button>
             <Button type="primary" onClick={multiFilterMachines}>Filtrele</Button>
           </div>
         </Drawer>
