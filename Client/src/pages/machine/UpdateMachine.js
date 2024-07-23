@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Content from '../../components/Content';
-import '../../styles/machine/CreateMachine.css';
+import '../../styles/machine/MachineFormPage.css';
 import { Button, DatePicker, Form, Input, InputNumber, Select } from 'antd';
 import categories from '../../assets/constants/categories';
 import machine from '../../api/machine';
@@ -24,20 +24,21 @@ const UpdateMachine = () => {
   const [form] = Form.useForm();
   const [filteredSubcategories, setFilteredSubcategories] = useState([]);
 
-  useEffect(() => {
-    getMachine(id);
-  }, [id]);
 
   const getMachine = async (id) => {
     try {
       const response = await machine.get(id);
       form.setFieldsValue({ ...response, manufacturingDate: dayjs(response.manufacturingDate) });
-      console.log({ ...response, manufacturingDate: dayjs(response.manufacturingDate) });
       setFilteredSubcategories(getSubcategories(response.categoryId));
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    getMachine(id);
+    // eslint-disable-next-line
+  }, []);
 
   const handleCategoryChange = (value) => {
     const category = categories.find(x => x.value === value);

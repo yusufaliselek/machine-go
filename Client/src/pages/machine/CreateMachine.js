@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Content from '../../components/Content';
-import '../../styles/machine/CreateMachine.css';
+import '../../styles/machine/MachineFormPage.css';
 import { Button, DatePicker, Form, Input, InputNumber, Select } from 'antd';
 import categories from '../../assets/constants/categories';
 import machine from '../../api/machine';
