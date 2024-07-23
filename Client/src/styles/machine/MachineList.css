@@ -8,6 +8,13 @@
   gap: 1rem;
 }
 
+.fallback {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .section-main-search {
   padding: 0.7rem 0 0 0;
   display: flex;

@@ -209,8 +209,10 @@ table {
 	box-shadow: 0 0 0 2px rgba(254, 177, 17, 0.2) !important;
 }
 
-.ant-picker-cell-today {
+.ant-pagination-item-active,
+.ant-pagination-item-active a {
 	border-color: var(--color-main) !important;
+	color: var(--color-main) !important;
 }
 
 /* Finish Ant Design Override */

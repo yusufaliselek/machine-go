@@ -56,13 +56,21 @@ const CreateMachine = () => {
               name="categoryId"
               rules={[{ required: true, message: 'Lütfen kategori seçiniz!' }]}
             >
-              <Select options={categories} onChange={handleCategoryChange} />
+              <Select onChange={handleCategoryChange}>
+                {categories.map((category, index) =>
+                  <Select.Option key={index} value={category.value}>{category.label}</Select.Option>
+                )}
+              </Select>
             </Form.Item>
 
             <Form.Item label="Alt Kategori" name="subcategoryId"
               rules={[{ required: true, message: 'Lütfen alt kategori seçiniz!' }]}
             >
-              <Select options={filteredSubcategories} />
+              <Select>
+                {filteredSubcategories.map((subcategory, index) =>
+                  <Select.Option key={index} value={subcategory.value}>{subcategory.label}</Select.Option>
+                )}
+              </Select>
             </Form.Item>
 
             <Form.Item

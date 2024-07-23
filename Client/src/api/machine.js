@@ -11,11 +11,11 @@ const create = async (machine) => {
   }
 }
 
-const update = async (machine) => {
+const update = async (machine, id) => {
   const form = new FormData();
   appendKey(machine, form);
   try {
-    const response = await api.put("/Machine", form);
+    const response = await api.put(`/Machine/${id}`, form);
     return response.data;
   } catch (error) {
     throw error;
