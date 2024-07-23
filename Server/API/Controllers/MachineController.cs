@@ -1,6 +1,5 @@
 ﻿using Core.DTOs.Machine;
 using Core.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -17,9 +16,9 @@ namespace API.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetMachines(int pageNumber = 1, int pageSize = 10, string searchTerm = null)
+        public async Task<IActionResult> GetMachines(int pageNumber = 1, int pageSize = 10, string searchTerm = null, int min = 0, int max = 0, string checkedKeys = null)
         {
-            var machines = await _machineService.GetMachinesAsync(pageNumber, pageSize, searchTerm);
+            var machines = await _machineService.GetMachinesAsync(pageNumber, pageSize, searchTerm, min, max, checkedKeys);
             return Ok(machines);
         }
 

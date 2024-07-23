@@ -1,9 +1,8 @@
+using Core.Services;
 using Microsoft.EntityFrameworkCore;
 using Repository;
-using Service.Services;
-using AutoMapper;
 using Service.Mapping;
-using Core.Services;
+using Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -40,21 +40,31 @@ const get = async (id) => {
   }
 }
 
-const list = async (page = 1, pageSize = 10, searchTerm = "") => {
+const list = async (page = 1, pageSize = 10, searchTerm = "", checkedKeys = [], priceRange = { min: 0, max: 99000000 }) => {
   try {
-    const response = await api.get(`/Machine?pageNumber=${page}&pageSize=${pageSize}&searchTerm=${searchTerm}`);
+    const response = await api.get(`/Machine`, {
+      params: {
+        pageNumber: page,
+        pageSize: pageSize,
+        searchTerm: searchTerm,
+        checkedKeys: checkedKeys.join(','),
+        min: priceRange.min,
+        max: priceRange.max
+      }
+    });
     return response.data;
   } catch (error) {
     throw error;
   }
 };
 
+
 const machine = {
   create,
   update,
   remove,
   get,
-  list,
-}
+  list
+};
 
 export default machine;

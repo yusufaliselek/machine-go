@@ -6,13 +6,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-}
-
-.fallback {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  background-color: white !important;
 }
 
 .section-main-search {
@@ -36,12 +30,68 @@
   height: calc(100vh - 110px);
 }
 
+.grid-container {
+  display: grid;
+  gap: 10px
+}
+
+.grid-col {
+  color: white;
+  margin: 0;
+}
+
 .card-icon {
   font-size: 18px !important;
 }
 
 .card-icon:hover {
   color: var(--color-main) !important;
+}
+
+@media (min-width: 1800px) {
+  .grid-col {
+    padding: 0 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .grid-container {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 992px) {
+  .grid-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+  }
+
+  .grid-col {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 767px) and (min-width: 576px) {
+  .grid-container {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 5px;
+  }
+
+  .grid-col {
+    padding: 0px;
+  }
+}
+
+@media (max-width: 575px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
 }
 
 .card-content {
@@ -54,7 +104,14 @@
   font-size: 14px;
   color: rgba(0, 0, 0, 0.8);
   font-weight: 700;
+  text-wrap: nowrap;
 }
+
+.card-content-icon {
+  font-size: 16px !important;
+  color: var(--color-main-light) !important;
+}
+
 
 .card-content-detail {
   display: flex;
@@ -76,16 +133,6 @@
   font-size: 14px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.8);
-}
-
-.card-content-icon {
-  font-size: 16px !important;
-  color: var(--color-main-light) !important;
-}
-
-.machine-col {
-  display: flex;
-  justify-content: center;
 }
 
 .ant-card {
@@ -115,4 +162,22 @@
   .ant-card {
     width: 300px !important;
   }
+}
+
+.drawer-filter-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.drawer-filter-main>div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.drawer-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
 }

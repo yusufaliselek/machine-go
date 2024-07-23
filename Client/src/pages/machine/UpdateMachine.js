@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Content from '../../components/Content';
-import '../../styles/machine/MachineFormPage.css';
 import { Button, DatePicker, Form, Input, InputNumber, Select } from 'antd';
 import categories from '../../assets/constants/categories';
 import machine from '../../api/machine';
 import Toast from '../../components/Toast';
 import dayjs from 'dayjs';
+import Swal from 'sweetalert2';
+import '../../styles/machine/MachineFormPage.css';
 
 const resetForm = {
   categoryId: "",
@@ -53,6 +54,30 @@ const UpdateMachine = () => {
   const onCancel = () => {
     navigate('/machine/list');
   };
+
+  const onDelete = async () => {
+    Swal.fire({
+      title: 'Emin misiniz?',
+      text: "Makineyi silmek istediğinize emin misiniz?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'red',
+      cancelButtonColor: '#fec74f',
+      confirmButtonText: 'Evet, Sil',
+      cancelButtonText: 'İptal'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await machine.remove(id);
+          Toast.Success("Makine başarıyla silindi.");
+          navigate('/machine/list');
+        } catch (error) {
+          console.log(error);
+          Toast.Error("Makine silinirken hata oluştu.");
+        }
+      }
+    });
+  }
 
   const onFinish = async (values) => {
     const date = new Date(values.manufacturingDate.$d);
@@ -131,6 +156,7 @@ const UpdateMachine = () => {
               <Button type="default" htmlType="button" style={{ width: "100%" }} onClick={onCancel}>
                 İptal
               </Button>
+              <Button type="link" htmlType='button' style={{ width: "100%" }} onClick={onDelete}>Sil</Button>
               <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
                 Güncelle
               </Button>

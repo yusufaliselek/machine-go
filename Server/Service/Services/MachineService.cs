@@ -50,24 +50,61 @@ namespace Service.Services
             return await ThrowIfMachineNotFoundAsync(id);
         }
 
-        public async Task<PagedResult<Machine>> GetMachinesAsync(int pageNumber, int pageSize, string? searchTerm)
+ public async Task<PagedResult<Machine>> GetMachinesAsync(int pageNumber, int pageSize, string searchTerm, int min, int max, string checkedKeys)
+{
+    int[] checkedKeysArray = Array.Empty<int>();
+    if (!string.IsNullOrWhiteSpace(checkedKeys))
+    {
+        checkedKeysArray = checkedKeys.Split(',').Select(int.Parse).ToArray();
+    }
+
+    IQueryable<Machine> result = _machines;
+
+    // Arama terimine göre filtreleme
+    if (!string.IsNullOrWhiteSpace(searchTerm))
+    {
+        result = result.Where(m => m.Status.Contains(searchTerm) || m.Description.Contains(searchTerm));
+    }
+
+    // Fiyat aralığına göre filtreleme
+    if (min > 0)
+    {
+        result = result.Where(m => m.Price >= min);
+    }
+    if (max > 0) {
+        result = result.Where(m => m.Price <= max);
+    }
+
+    // Kategori ve altkategori ID'lerine göre filtreleme
+    if (checkedKeysArray.Length > 0)
+    {
+        // Kategori ID ve altkategori ID'lerini ayır
+        var categoryIds = checkedKeysArray.Where(id => id > 0 && id < 1000).ToArray();
+        var subcategoryIds = checkedKeysArray.Where(id => id >= 1000).ToArray();
+
+        // Kategori ID'lerine göre filtreleme
+        if (categoryIds.Length > 0)
         {
-            IQueryable<Machine> result = _machines;
-
-            if (!string.IsNullOrWhiteSpace(searchTerm))
-            {
-                result = result.Where(m => m.Status.Contains(searchTerm) || m.Description.Contains(searchTerm));
-            }
-
-            var totalCount = await result.CountAsync();
-            var machines = await result.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
-
-            return new PagedResult<Machine>
-            {
-                Items = machines,
-                TotalCount = totalCount
-            };
+            result = result.Where(m => categoryIds.Contains(m.CategoryId));
         }
+
+        // Altkategori ID'lerine göre filtreleme
+        if (subcategoryIds.Length > 0)
+        {
+            result = result.Where(m => subcategoryIds.Contains(m.SubcategoryId));
+        }
+    }
+
+    var totalCount = await result.CountAsync();
+    var machines = await result.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+
+    return new PagedResult<Machine>
+    {
+        Items = machines,
+        TotalCount = totalCount
+    };
+}
+
 
         public async Task<Machine> UpdateMachineAsync(int id, UpdateMachineDto updateMachineDto)
         {

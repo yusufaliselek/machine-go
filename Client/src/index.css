@@ -166,6 +166,15 @@ table {
 	color: #000 !important;
 }
 
+.ant-btn-link {
+	color: var(--color-main) !important;
+}
+
+.ant-btn-link:hover {
+	color: var(--color-main-dark) !important;
+	background-color: #fff6e8 !important;
+}
+
 .ant-input-primary:hover {
 	background-color: var(--color-main-light) !important;
 	border-color: var(--color-main-light) !important;
@@ -213,6 +222,15 @@ table {
 .ant-pagination-item-active a {
 	border-color: var(--color-main) !important;
 	color: var(--color-main) !important;
+}
+
+.ant-tree-checkbox-inner:hover {
+	border-color: var(--color-main-light) !important;
+}
+
+.ant-tree-checkbox-checked .ant-tree-checkbox-inner {
+	background-color: var(--color-main) !important;
+	border-color: var(--color-main) !important;
 }
 
 /* Finish Ant Design Override */

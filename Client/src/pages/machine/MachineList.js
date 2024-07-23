@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/machine/MachineList.css';
-import { Button, Input, Drawer, Card, Pagination, Row, Col, Tooltip, Empty, Tree } from 'antd';
+import { Button, Input, Drawer, Card, Pagination, Tooltip, Empty, Tree, InputNumber } from 'antd';
 import { FilterOutlined, EditOutlined, EyeOutlined, DollarOutlined, InfoCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import categories from '../../assets/constants/categories';
 import machine from '../../api/machine';
@@ -37,12 +37,19 @@ const MachineList = () => {
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
-  const [pagination, setPagination] = useState({ page: 1, pageSize: 12, searchTerm: "" });
+  const [pagination, setPagination] = useState({ page: 1, pageSize: 10, searchTerm: "" });
   const [machines, setMachines] = useState(resetList);
+
+  // TreeView
   const [expandedKeys, setExpandedKeys] = useState([]);
   const [checkedKeys, setCheckedKeys] = useState([]);
-  const [selectedKeys, setSelectedKeys] = useState([]);
   const [autoExpandParent, setAutoExpandParent] = useState(true);
+
+  // Multi Filter
+  const [priceRange, setPriceRange] = useState({
+    min: 0,
+    max: 0
+  });
 
   const onExpand = (expandedKeysValue) => {
     setExpandedKeys(expandedKeysValue);
@@ -53,11 +60,7 @@ const MachineList = () => {
     console.log('onCheck', checkedKeysValue);
     setCheckedKeys(checkedKeysValue);
   };
-  
-  const onSelect = (selectedKeysValue, info) => {
-    console.log('onSelect', info);
-    setSelectedKeys(selectedKeysValue);
-  };
+
 
   const showDrawer = () => {
     setOpen(true);
@@ -85,7 +88,19 @@ const MachineList = () => {
 
   const getMachines = async ({ page, pageSize, searchTerm }) => {
     try {
-      const response = await machine.list(page, pageSize, searchTerm);
+      const response = await machine.list(page, pageSize, searchTerm, checkedKeys, priceRange);
+      setMachines({
+        items: response.items,
+        totalCount: response.totalCount
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const multiFilterMachines = async () => {
+    try {
+      const response = await machine.list(pagination.page, pagination.pageSize, pagination.searchTerm, checkedKeys, priceRange);
       setMachines({
         items: response.items,
         totalCount: response.totalCount
@@ -129,11 +144,10 @@ const MachineList = () => {
             <Button type="primary" icon={<PlusOutlined />} onClick={createMachine} style={{ padding: "0 20px" }} />
           </Tooltip>
         </div>
-        {machines === resetList ?
-          <div className='section-main-empty'><Empty description={"Makine Bulunamadı"} /></div>
-          :
-          <div className='section-main-content'>
-            <Drawer title="Makineleri Filtreleyin" onClose={onClose} open={open}>
+        <Drawer title="Makineleri Filtreleyin" onClose={onClose} open={open}>
+          <div className='drawer-filter-main'>
+            <div>
+              <p>Kategori ve Alt Kategori</p>
               <Tree
                 checkable
                 onExpand={onExpand}
@@ -141,16 +155,46 @@ const MachineList = () => {
                 autoExpandParent={autoExpandParent}
                 onCheck={onCheck}
                 checkedKeys={checkedKeys}
-                onSelect={onSelect}
-                selectedKeys={selectedKeys}
                 treeData={treeData}
               />
-            </Drawer>
-            <Row gutter={[16, 16]}>
+            </div>
+            <div>
+              <p>Fiyat Aralığı</p>
+              <Input.Group compact style={{ display: "flex" }}>
+                <InputNumber
+                  style={{ width: '100%' }}
+                  formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  placeholder="Minimum" step={100} onChange={value => setPriceRange({ ...priceRange, min: value })} />
+                <Input placeholder="~" disabled
+                  style={{
+                    width: '10%',
+                    borderLeft: 0,
+                    borderRight: 0,
+                    pointerEvents: 'none',
+                  }} />
+                <InputNumber
+                  style={{ width: '100%' }}
+                  formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  placeholder="Maksimum" step={100} onChange={value => setPriceRange({ ...priceRange, max: value })} />
+              </Input.Group>
+            </div>
+          </div>
+          <br />
+          <div className='drawer-actions'>
+            <Button onClick={onClose}>Sıfırla</Button>
+            <Button type="primary" onClick={multiFilterMachines}>Filtrele</Button>
+          </div>
+        </Drawer>
+        {machines.totalCount === 0 ?
+          <div className='section-main-empty'><Empty description={"Makine Bulunamadı"} /></div>
+          :
+          <div className='section-main-content'>
+
+            <div className='grid-container'>
               {machines.items.map((machine, index) => {
                 const subcategoryLabel = categories.find(x => x.value === machine.categoryId)?.subcategories.find(x => x.value === machine.subcategoryId)?.label;
                 return (
-                  <Col key={index} xs={24} sm={24} md={8} lg={6} xl={4} className='machine-col'>
+                  <div className='grid-col' key={index}>
                     <Card
                       style={{ width: "100%" }}
                       cover={
@@ -177,13 +221,13 @@ const MachineList = () => {
                         <CardContentText title='Fiyat' content={formatPrice(machine.price)} icon={<DollarOutlined className='card-content-icon' />} />
                       </div>
                     </Card>
-                  </Col>
+                  </div>
                 )
               })}
-            </Row>
+            </div>
           </div>
         }
-        {machines !== resetList && <Pagination
+        {machines.totalCount !== 0 && <Pagination
           style={{ marginTop: "auto", paddingBottom: "5px" }}
           total={machines.totalCount}
           showTotal={(total) => `Toplam ${total} Makine`}

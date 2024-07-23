@@ -56,8 +56,8 @@ const MachineDetail = () => {
   return (
     <Content pageName={"Makineler"} children={
       <div className='section-main'>
-        <div className="product-card">
-          <div className="product-image">
+        <div className="machine-card">
+          <div className="machine-image">
             <Image.PreviewGroup>
               <Image className='main-image' src={images[0]} />
               <div className="thumbnail-images">
@@ -68,10 +68,10 @@ const MachineDetail = () => {
               </div>
             </Image.PreviewGroup>
           </div>
-          <div className="product-info">
+          <div className="machine-info">
             <h1>{subcategoryName}</h1>
             <h2>{category?.label}</h2>
-            <p className="free-delivery">{formatPrice(detail.price)}</p>
+            <p className="price">{formatPrice(detail.price)}</p>
             <p className="description">
               {detail.description}
             </p>

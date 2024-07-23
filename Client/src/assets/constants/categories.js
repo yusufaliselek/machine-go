@@ -4,11 +4,11 @@ const categories = [
     label: 'Hafriyat Grubu',
     subcategories: [
       {
-        value: 11,
+        value: 10000,
         label: 'Ekskavatörler Kazıcı'
       },
       {
-        value: 12,
+        value: 10001,
         label: 'Loder Yükleyici'
       }
     ]
@@ -18,11 +18,11 @@ const categories = [
     label: 'İnşaat Grubu',
     subcategories: [
       {
-        value: 23,
+        value: 10002,
         label: 'Beton Santrali'
       },
       {
-        value: 24,
+        value: 10003,
         label: 'Damperli Kamyon'
       }
     ]
@@ -32,11 +32,11 @@ const categories = [
     label: 'Tarım Grubu',
     subcategories: [
       {
-        value: 35,
+        value: 10004,
         label: 'Biçerdöver'
       },
       {
-        value: 36,
+        value: 10005,
         label: 'Traktör'
       }
     ]
@@ -46,11 +46,11 @@ const categories = [
     label: 'Forklift ve İstifleyiciler',
     subcategories: [
       {
-        value: 47,
+        value: 10006,
         label: 'Forklift'
       },
       {
-        value: 48,
+        value: 10007,
         label: 'Akülü İstifleyici'
       }
     ]
@@ -60,11 +60,11 @@ const categories = [
     label: 'Vinçler',
     subcategories: [
       {
-        value: 59,
+        value: 10008,
         label: 'Mobil Vinç'
       },
       {
-        value: 60,
+        value: 10009,
         label: 'Kule Vinç'
       }
     ]
