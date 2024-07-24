@@ -1,6 +1,7 @@
 import { Card, Tooltip } from 'antd';
 import { EditOutlined, EyeOutlined, DollarOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import formatPrice from '../assets/functions/formatPrice';
+import { useTranslation } from 'react-i18next';
 
 const images = [
   require('../assets/images/landing-card-1.png'),
@@ -28,33 +29,36 @@ export const MachineCard = ({
   subcategoryLabel,
   updateMachine,
   rentMachine
-}) => (
-  <Card
-    style={{ width: "100%" }}
-    cover={
-      <img
-        alt={machine.description}
-        src={images[index % 5]}
-      />
-    }
-    actions={[
-      <Tooltip title="Düzenle"><EditOutlined className='card-icon' key="setting" onClick={() => updateMachine(machine.id)} /></Tooltip>,
-      <Tooltip title="Detay"><EyeOutlined className='card-icon' key="shop" onClick={() => rentMachine(machine.id)} /></Tooltip>,
-    ]}
-  >
-    <div className='card-content'>
-      <h3 style={{ paddingLeft: "5px" }}>
-        {
-          subcategoryLabel.length > 15 ?
-            <Tooltip title={subcategoryLabel}>{subcategoryLabel.substring(0, 15) + "..."}</Tooltip>
-            :
-            subcategoryLabel
-        }
-      </h3>
-      <CardContentText title='Durum' content={machine.status} icon={<InfoCircleOutlined className='card-content-icon' />} />
-      <CardContentText title='Fiyat' content={formatPrice(machine.price)} icon={<DollarOutlined className='card-content-icon' />} />
-    </div>
-  </Card>
-);
+}) => {
+  const { t} = useTranslation();
+  return (
+    <Card
+      style={{ width: "100%" }}
+      cover={
+        <img
+          alt={machine.description}
+          src={images[index % 5]}
+        />
+      }
+      actions={[
+        <Tooltip title={t('machineList.machineCard.edit')}><EditOutlined className='card-icon' key="setting" onClick={() => updateMachine(machine.id)} /></Tooltip>,
+        <Tooltip title={t('machineList.machineCard.info')}><EyeOutlined className='card-icon' key="shop" onClick={() => rentMachine(machine.id)} /></Tooltip>,
+      ]}
+    >
+      <div className='card-content'>
+        <h3 style={{ paddingLeft: "5px" }}>
+          {
+            subcategoryLabel.length > 15 ?
+              <Tooltip title={subcategoryLabel}>{subcategoryLabel.substring(0, 15) + "..."}</Tooltip>
+              :
+              subcategoryLabel
+          }
+        </h3>
+        <CardContentText title={t('machineList.machineCard.status')} content={machine.status} icon={<InfoCircleOutlined className='card-content-icon' />} />
+        <CardContentText title={t('machineList.machineCard.price')} content={formatPrice(machine.price)} icon={<DollarOutlined className='card-content-icon' />} />
+      </div>
+    </Card>
+  );
+}
 
 export default MachineCard; // Ensure this is correct if you're using default export

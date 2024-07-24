@@ -1,5 +1,108 @@
 {
+  "navbar": {
+    "menuItems": {
+      "machines": "Machines",
+      "about": "About Us",
+      "contact": "Contact"
+    },
+    "login": "Login",
+    "register": "Register"
+  },
   "main": {
-    "title": "Welcome to React"
+    "title": "Trusted Address in Machine Rental and Sales",
+    "subTitle": "Machines That Make a Difference in Your Work",
+    "button": "Call Now",
+    "ourServices": "Our Services",
+    "ourServicesDesc": "Speed up and ease your work with the services we offer.",
+    "card1": {
+      "title": "Excavators",
+      "desc": "Powerful and durable excavators"
+    },
+    "card2": {
+      "title": "Compactors",
+      "desc": "High-performance compactors"
+    },
+    "card3": {
+      "title": "Graders",
+      "desc": "Indispensable graders for construction machines"
+    }
+  },
+  "notFound": {
+    "desc": "The page you are looking for could not be found.",
+    "button": "Return to Homepage"
+  },
+  "machineList": {
+    "pageName": "Machines",
+    "search": "Search Machine",
+    "filter": "Filter",
+    "export": "Export to Excel",
+    "create": "Add New Machine",
+    "multiFilter": {
+      "title": "Filter Machines",
+      "categoryAndSubcategory": "Category and Subcategory",
+      "priceRange": "Price Range",
+      "min": "Minimum",
+      "max": "Maximum",
+      "reset": "Reset",
+      "apply": "Apply"
+    },
+    "notFound": "No machine found.",
+    "total": "Total",
+    "machines": "Machine",
+    "machineCard": {
+      "status": "Status",
+      "price": "Price",
+      "edit": "Edit",
+      "info": "Details"
+    }
+  },
+  "createMachine": {
+    "pageName": "Machines",
+    "title": "Add New Machine",
+    "form": {
+      "category": "Category",
+      "categoryRequired": "Please select a category!",
+      "subCategory": "Subcategory",
+      "subCategoryRequired": "Please select a subcategory!",
+      "price": "Price",
+      "priceRequired": "Please enter a price!",
+      "description": "Description",
+      "descriptionRequired": "Please enter a description!",
+      "status": "Machine Status",
+      "statusRequired": "Please select the machine status!",
+      "manufacturingDate": "Manufacturing Date",
+      "manufacturingDateRequired": "Please enter the manufacturing date!",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "success": "Machine added successfully.",
+    "error": "An error occurred while adding the machine."
+  },
+  "updateMachine": {
+    "pageName": "Machines",
+    "title": "Edit Machine",
+    "form": {
+      "category": "Category",
+      "categoryRequired": "Please select a category!",
+      "subCategory": "Subcategory",
+      "subCategoryRequired": "Please select a subcategory!",
+      "price": "Price",
+      "priceRequired": "Please enter a price!",
+      "description": "Description",
+      "descriptionRequired": "Please enter a description!",
+      "status": "Machine Status",
+      "statusRequired": "Please select the machine status!",
+      "manufacturingDate": "Manufacturing Date",
+      "manufacturingDateRequired": "Please enter the manufacturing date!",
+      "save": "Update",
+      "remove": "Delete",
+      "cancel": "Cancel"
+    },
+    "success": "Machine updated successfully.",
+    "error": "An error occurred while updating the machine."
+  },
+  "machineDetail": {
+    "cancel": "Go Back",
+    "submit": "Rent Now"
   }
 }

@@ -48,6 +48,61 @@
     },
     "notFound": "Makine bulunamadı.",
     "total": "Toplam",
-    "machines": "Makine"
+    "machines": "Makine",
+    "machineCard": {
+      "status": "Durum",
+      "price": "Fiyat",
+      "edit": "Düzenle",
+      "info": "Detay"
+    }
+  },
+  "createMachine": {
+    "pageName": "Makineler",
+    "title": "Yeni Makine Ekle",
+    "form": {
+      "category": "Kategori",
+      "categoryRequired": "Lütfen kategori seçiniz!",
+      "subCategory": "Alt Kategori",
+      "subCategoryRequired": "Lütfen alt kategori seçiniz!",
+      "price": "Fiyat",
+      "priceRequired": "Lütfen fiyat giriniz!",
+      "description": "Açıklama",
+      "descriptionRequired": "Lütfen açıklama giriniz!",
+      "status": "Makine Durumu",
+      "statusRequired": "Lütfen makine durumu seçiniz!",
+      "manufacturingDate": "Üretim Tarihi",
+      "manufacturingDateRequired": "Lütfen üretim tarihi seçiniz!",
+      "save": "Kaydet",
+      "cancel": "İptal"
+    },
+    "success": "Makine başarıyla eklendi.",
+    "error": "Makine eklenirken bir hata oluştu."
+  },
+  "updateMachine": {
+    "pageName": "Makineler",
+    "title": "Makine Düzenle",
+    "form": {
+      "category": "Kategori",
+      "categoryRequired": "Lütfen kategori seçiniz!",
+      "subCategory": "Alt Kategori",
+      "subCategoryRequired": "Lütfen alt kategori seçiniz!",
+      "price": "Fiyat",
+      "priceRequired": "Lütfen fiyat giriniz!",
+      "description": "Açıklama",
+      "descriptionRequired": "Lütfen açıklama giriniz!",
+      "status": "Makine Durumu",
+      "statusRequired": "Lütfen makine durumu seçiniz!",
+      "manufacturingDate": "Üretim Tarihi",
+      "manufacturingDateRequired": "Lütfen üretim tarihi seçiniz!",
+      "save": "Güncelle",
+      "remove": "Sil",
+      "cancel": "İptal"
+    },
+    "success": "Makine başarıyla güncellendi.",
+    "error": "Makine güncellenirken bir hata oluştu."
+  },
+  "machineDetail": {
+    "cancel": "Geri Dön",
+    "submit": "Şimdi Kirala"
   }
 }

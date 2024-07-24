@@ -8,6 +8,7 @@ import Toast from '../../components/Toast';
 import dayjs from 'dayjs';
 import Swal from 'sweetalert2';
 import '../../styles/machine/MachineFormPage.css';
+import { useTranslation } from 'react-i18next';
 
 const resetForm = {
   categoryId: "",
@@ -20,6 +21,7 @@ const resetForm = {
 
 const UpdateMachine = () => {
   const { id } = useParams();
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [form] = Form.useForm();
@@ -94,21 +96,21 @@ const UpdateMachine = () => {
   };
 
   return (
-    <Content pageName={"Makineler"} children={
+    <Content pageName={t('updateMachine.pageName')} children={
       <div className='section-main'>
         <div className='form'>
-          <h2 className='form-title'>Makine Düzenle</h2>
+          <h2 className='form-title'>{t('updateMachine.title')}</h2>
           <hr />
           <Form
             form={form}
             layout={"vertical"}
             onFinish={onFinish}
-            initialValues={resetForm} // Use initialValues to set form fields
+            initialValues={resetForm}
           >
             <Form.Item
-              label="Kategori"
+              label={t('updateMachine.form.category')}
               name="categoryId"
-              rules={[{ required: true, message: 'Lütfen kategori seçiniz!' }]}
+              rules={[{ required: true, message: t('updateMachine.form.categoryRequired') }]}
             >
               <Select onChange={handleCategoryChange}>
                 {categories.map((category, index) =>
@@ -117,8 +119,8 @@ const UpdateMachine = () => {
               </Select>
             </Form.Item>
 
-            <Form.Item label="Alt Kategori" name="subcategoryId"
-              rules={[{ required: true, message: 'Lütfen alt kategori seçiniz!' }]}
+            <Form.Item label={t('updateMachine.form.subCategory')} name="subcategoryId"
+              rules={[{ required: true, message: t('updateMachine.form.subCategoryRequired') }]}
             >
               <Select>
                 {filteredSubcategories.map((subcategory, index) =>
@@ -128,37 +130,37 @@ const UpdateMachine = () => {
             </Form.Item>
 
             <Form.Item
-              label="Makine Açıklaması"
+              label={t('updateMachine.form.description')}
               name="description"
-              rules={[{ required: true, message: 'Lütfen makine açıklaması giriniz!' }]}>
+              rules={[{ required: true, message: t('updateMachine.form.descriptionRequired') }]}>
               <Input />
             </Form.Item>
             <Form.Item
-              label="Makine Fiyatı"
+              label={t('updateMachine.form.price')}
               name="price"
-              rules={[{ required: true, message: 'Lütfen makine fiyatı giriniz!' }]}>
+              rules={[{ required: true, message: t('updateMachine.form.priceRequired') }]}>
               <InputNumber style={{ width: '100%' }} />
             </Form.Item>
 
             <Form.Item
-              label="Makine Durumu"
+              label={t('updateMachine.form.status')}
               name="status"
-              rules={[{ required: true, message: 'Lütfen makine durumunu giriniz!' }]}>
+              rules={[{ required: true, message: t('updateMachine.form.statusRequired') }]}>
               <Input />
             </Form.Item>
 
-            <Form.Item label="Üretim Tarihi" name="manufacturingDate"
-              rules={[{ required: true, message: 'Lütfen üretim tarihi seçiniz!' }]}>
+            <Form.Item label={t('updateMachine.form.manufacturingDate')} name="manufacturingDate"
+              rules={[{ required: true, message: t('updateMachine.form.manufacturingDateRequired') }]}>
               <DatePicker style={{ width: '100%', cursor: "pointer" }} format={"DD/MM/YYYY"} placeholder='' />
             </Form.Item>
 
             <div className='form-footer'>
               <Button type="default" htmlType="button" style={{ width: "100%" }} onClick={onCancel}>
-                İptal
+                {t('updateMachine.form.cancel')}
               </Button>
-              <Button type="link" htmlType='button' style={{ width: "100%" }} onClick={onDelete}>Sil</Button>
+              <Button type="link" htmlType='button' style={{ width: "100%" }} onClick={onDelete}>  {t('updateMachine.form.remove')}</Button>
               <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
-                Güncelle
+                {t('updateMachine.form.save')}
               </Button>
             </div>
           </Form>

@@ -18,16 +18,14 @@ const MySwal = withReactContent(Swal).mixin({
 const Success = (message) => {
   MySwal.fire({
     icon: 'success',
-    title: 'Başarılı',
-    text: message,
+    title: message,
   })
 }
 
 const Error = (message) => {
   MySwal.fire({
     icon: 'error',
-    title: 'Hata',
-    text: message,
+    title: message,
   })
 }
 

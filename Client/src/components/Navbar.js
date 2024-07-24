@@ -49,7 +49,10 @@ const Navbar = ({ pageName }) => {
 
 
   const LanguageSelect = () =>
-    <Select style={{ width: "80px" }} value={i18n.language} onChange={(value) => i18n.changeLanguage(value)}>
+    <Select style={{ width: "80px" }} value={i18n.language} onChange={(value) => {
+      i18n.changeLanguage(value);
+      localStorage.setItem('lang', value);
+    }}>
       {languageItems.map((item, index) =>
         <Select.Option key={index} value={item.value} style={{ marginBottom: "5px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>

@@ -6,10 +6,12 @@ import { Button, DatePicker, Form, Input, InputNumber, Select } from 'antd';
 import categories from '../../assets/constants/categories';
 import machine from '../../api/machine';
 import Toast from '../../components/Toast';
+import { useTranslation } from 'react-i18next';
 
 const CreateMachine = () => {
 
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [filteredSubcategories, setFilteredSubcategories] = useState([]);
 
@@ -44,17 +46,17 @@ const CreateMachine = () => {
   }
 
   return (
-    <Content pageName={"Makineler"} children={
+    <Content pageName={t('createMachine.pageName')} children={
       <div className='section-main'>
         <div className='form'>
-          <h2 className='form-title'>Makine Ekle</h2>
+          <h2 className='form-title'>{t('createMachine.title')}</h2>
           <hr />
           <Form layout={"vertical"} onFinish={onFinish}>
 
             <Form.Item
-              label="Kategori"
+              label={t('createMachine.form.category')}
               name="categoryId"
-              rules={[{ required: true, message: 'Lütfen kategori seçiniz!' }]}
+              rules={[{ required: true, message: t('createMachine.form.categoryRequired') }]}
             >
               <Select onChange={handleCategoryChange}>
                 {categories.map((category, index) =>
@@ -63,8 +65,8 @@ const CreateMachine = () => {
               </Select>
             </Form.Item>
 
-            <Form.Item label="Alt Kategori" name="subcategoryId"
-              rules={[{ required: true, message: 'Lütfen alt kategori seçiniz!' }]}
+            <Form.Item label={t('createMachine.form.subCategory')} name="subcategoryId"
+              rules={[{ required: true, message: t('createMachine.form.subCategoryRequired') }]}
             >
               <Select>
                 {filteredSubcategories.map((subcategory, index) =>
@@ -74,36 +76,36 @@ const CreateMachine = () => {
             </Form.Item>
 
             <Form.Item
-              label="Makine Açıklaması"
+              label={t('createMachine.form.description')}
               name="description"
-              rules={[{ required: true, message: 'Lütfen makine açıklaması giriniz!' }]}>
+              rules={[{ required: true, message: t('createMachine.form.descriptionRequired') }]}>
               <Input />
             </Form.Item>
             <Form.Item
-              label="Makine Fiyatı"
+              label={t('createMachine.form.price')}
               name="price"
-              rules={[{ required: true, message: 'Lütfen makine fiyatı giriniz!' }]}>
+              rules={[{ required: true, message: t('createMachine.form.priceRequired') }]}>
               <InputNumber style={{ width: '100%' }} />
             </Form.Item>
 
             <Form.Item
-              label="Makine Durumu"
+              label={t('createMachine.form.status')}
               name="status"
-              rules={[{ required: true, message: 'Lütfen makine durumunu giriniz!' }]}>
+              rules={[{ required: true, message: t('createMachine.form.statusRequired') }]}>
               <Input />
             </Form.Item>
 
-            <Form.Item label="Üretim Tarihi" name="manufacturingDate"
-              rules={[{ required: true, message: 'Lütfen üretim tarihi seçiniz!' }]}>
+            <Form.Item label={t('createMachine.form.manufacturingDate')} name="manufacturingDate"
+              rules={[{ required: true, message: t('createMachine.form.manufacturingDateRequired') }]}>
               <DatePicker style={{ width: '100%', cursor: "pointer" }} format={"DD/MM/YYYY"} placeholder='' />
             </Form.Item>
 
             <div className='form-footer'>
               <Button type="default" htmlType="button" style={{ width: "100%" }} onClick={onCancel}>
-                İptal
+                {t('createMachine.form.cancel')}
               </Button>
               <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
-                Kaydet
+                {t('createMachine.form.save')}
               </Button>
             </div>
           </Form>

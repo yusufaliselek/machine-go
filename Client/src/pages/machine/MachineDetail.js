@@ -5,6 +5,8 @@ import machine from '../../api/machine';
 import { Image, Button } from 'antd';
 import '../../styles/machine/MachineDetail.css';
 import categories from '../../assets/constants/categories';
+import { useTranslation } from 'react-i18next';
+import formatPrice from '../../assets/functions/formatPrice';
 
 const resetDetail = {
   categoryId: "",
@@ -21,15 +23,13 @@ const images = [
   require('../../assets/images/machine-detail-1.png'),
   require('../../assets/images/machine-detail-4.png'),
   require('../../assets/images/machine-detail-5.png'),
-]
-
-const formatPrice = (price) => {
-  return new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(price);
-};
+];
 
 const MachineDetail = () => {
   const { id } = useParams();
+  const { t } = useTranslation();
   const navigate = useNavigate();
+
   const [detail, setDetail] = useState(resetDetail);
 
   const getMachine = async (id) => {
@@ -77,8 +77,8 @@ const MachineDetail = () => {
             </p>
             <p className="status">{detail.status}</p>
             <div className="order-section">
-              <Button type="default" onClick={onCancel}>Geri Dön</Button>
-              <Button type="primary">Şimdi Kirala</Button>
+              <Button type="default" onClick={onCancel}>{t('machineDetail.cancel')}</Button>
+              <Button type="primary">{t('machineDetail.submit')}</Button>
             </div>
           </div>
         </div>

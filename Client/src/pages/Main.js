@@ -19,17 +19,17 @@ const Main = () => {
     {
       imgUrl: require('../assets/images/landing-card-1.png'),
       title: t('main.card1.title'),
-      description: t('main.card1.description')
+      description: t('main.card1.desc')
     },
     {
       imgUrl: require('../assets/images/landing-card-2.png'),
       title: t('main.card2.title'),
-      description: t('main.card2.description')
+      description: t('main.card2.desc')
     },
     {
       imgUrl: require('../assets/images/landing-card-4.png'),
       title: t('main.card3.title'),
-      description: t('main.card3.description')
+      description: t('main.card3.desc')
     }
   ]
 
