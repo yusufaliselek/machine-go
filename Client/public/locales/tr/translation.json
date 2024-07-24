@@ -1,0 +1,53 @@
+{
+  "navbar": {
+    "menuItems": {
+      "machines": "Makineler",
+      "about": "Hakkımızda",
+      "contact": "İletişim"
+    },
+    "login": "Giriş Yap",
+    "register": "Kayıt Ol"
+  },
+  "main": {
+    "title": "Makine Kiralama ve Satışta Güvenilir Adres",
+    "subTitle": "İşinizde Fark Yaratan Makineler",
+    "button": "Hemen Ara",
+    "ourServices": "Hizmetlerimiz",
+    "ourServicesDesc": "Sizlere sunduğumuz hizmetlerle işlerinizi hızlandırın ve kolaylaştırın.",
+    "card1": {
+      "title": "Ekskavatörler",
+      "desc": "Güçlü ve dayanıklı ekskavatörler"
+    },
+    "card2": {
+      "title": "Kompaktörler",
+      "desc": "Yüksek performanslı kompaktörler"
+    },
+    "card3": {
+      "title": "Greyderler",
+      "desc": "İş makinelerinin vazgeçilmezi greyderler"
+    }
+  },
+  "notFound": {
+    "desc": "Aradığınız sayfa bulunamadı.",
+    "button": "Anasayfaya Dön"
+  },
+  "machineList": {
+    "pageName": "Makineler",
+    "search": "Makine Arayın",
+    "filter": "Filtrele",
+    "export": "Excel'e Aktar",
+    "create": "Yeni Makine Ekle",
+    "multiFilter": {
+      "title": "Makineleri Filtreleyin",
+      "categoryAndSubcategory": "Kategori ve Alt Kategori",
+      "priceRange": "Fiyat Aralığı",
+      "min": "Minimum",
+      "max": "Maksimum",
+      "reset": "Sıfırla",
+      "apply": "Filtrele"
+    },
+    "notFound": "Makine bulunamadı.",
+    "total": "Toplam",
+    "machines": "Makine"
+  }
+}

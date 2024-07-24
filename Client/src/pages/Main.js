@@ -4,29 +4,35 @@ import Content from '../components/Content'
 import { Button } from 'antd';
 import { Card } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const { Meta } = Card;
 
-const cardData = [
-  {
-    imgUrl: require('../assets/images/landing-card-1.png'),
-    title: 'Ekskavatörler',
-    description: 'Güçlü ve dayanıklı ekskavatörler'
-  },
-  {
-    imgUrl: require('../assets/images/landing-card-2.png'),
-    title: 'Kompaktörler',
-    description: 'Yüksek performanslı kompaktörler'
-  },
-  {
-    imgUrl: require('../assets/images/landing-card-4.png'),
-    title: 'Greyderler',
-    description: 'İş makinelerinin vazgeçilmezi greyderler'
-  }
-]
 
 const Main = () => {
+
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+
+  const cardData = [
+    {
+      imgUrl: require('../assets/images/landing-card-1.png'),
+      title: t('main.card1.title'),
+      description: t('main.card1.description')
+    },
+    {
+      imgUrl: require('../assets/images/landing-card-2.png'),
+      title: t('main.card2.title'),
+      description: t('main.card2.description')
+    },
+    {
+      imgUrl: require('../assets/images/landing-card-4.png'),
+      title: t('main.card3.title'),
+      description: t('main.card3.description')
+    }
+  ]
+
   return (
     <Content children={
       <div className='body'>
@@ -34,20 +40,18 @@ const Main = () => {
         <div className="hero-section">
           <div className='hero-section-text'>
             <h1 className='hero-section-header'>
-              Makine Kiralama ve Satışta Güvenilir Adres
+              {t('main.title')}
             </h1>
             <h3 className='hero-section-paragraph'>
-              İşinizde Fark Yaratan Makineler
+              {t('main.subTitle')}
             </h3>
-            <Button type="primary" size='large' onClick={()=> navigate('/machine/list')}>Hemen Ara</Button>
+            <Button type="primary" size='large' onClick={() => navigate('/machine/list')}>{t('main.button')}</Button>
           </div>
         </div>
         {/* SERVICES SECTION */}
         <div className='section-services'>
-          <h1 className='section-header'>Hizmetlerimiz</h1>
-          <p className='section-paragraph'>
-            Sizlere sunduğumuz hizmetlerle işlerinizi hızlandırın ve kolaylaştırın.
-          </p>
+          <h1 className='section-header'>{t('main.ourServices')}</h1>
+          <p className='section-paragraph'>{t('main.ourServicesDesc')}</p>
         </div>
         {/* DETAIL SECTION */}
         <div className='detail-section'>

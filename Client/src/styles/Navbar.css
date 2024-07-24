@@ -128,6 +128,25 @@
     }
 }
 
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+    .navbar {
+        height: 150px;
+    }
+
+    .logo {
+        padding: 5px 0;
+    }
+
+    .navbar-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-auth {
+        padding-bottom: 10px;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .navbar-container {
         width: 80%;
@@ -145,12 +164,15 @@
         cursor: pointer;
         display: block;
     }
+
     .open {
         display: flex;
     }
+
     .mobile-menu-items {
         display: flex;
     }
+
     .mobile-menu-auth {
         display: flex;
     }

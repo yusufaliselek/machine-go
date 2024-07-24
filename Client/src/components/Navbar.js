@@ -2,31 +2,62 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Navbar.css';
 import logo from '../assets/images/logo.png';
-import { Button } from 'antd';
+import { Button, Select } from 'antd';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
+import { useTranslation } from 'react-i18next';
 
-const menuItems = [
+
+
+const languageItems = [
   {
-    name: 'Makineler',
-    link: '/machine/list'
+    name: 'TR',
+    value: 'tr',
+    img: require('../assets/images/tr.png')
   },
   {
-    name: 'Hakkımızda',
-    link: '/about'
-  },
-  {
-    name: 'İletişim',
-    link: '/contact'
+    name: 'EN',
+    value: 'en',
+    img: require('../assets/images/en.png')
   }
 ];
+
 
 const Navbar = ({ pageName }) => {
 
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+
+  const menuItems = [
+    {
+      name: t('navbar.menuItems.machines'),
+      link: '/machine/list'
+    },
+    {
+      name: t('navbar.menuItems.about'),
+      link: '/about'
+    },
+    {
+      name: t('navbar.menuItems.contact'),
+      link: '/contact'
+    }
+  ];
+  // t
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+
+
+  const LanguageSelect = () =>
+    <Select style={{ width: "80px" }} value={i18n.language} onChange={(value) => i18n.changeLanguage(value)}>
+      {languageItems.map((item, index) =>
+        <Select.Option key={index} value={item.value} style={{ marginBottom: "5px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <img src={item.img} alt={item.name} width={16} /> {item.name}
+          </div>
+        </Select.Option>
+      )}
+    </Select>
 
   return (
     <nav className='navbar'>
@@ -40,8 +71,12 @@ const Navbar = ({ pageName }) => {
           ))}
         </ul>
         <div className='nav-auth'>
-          <Button type='default' onClick={() => navigate('/login')}>Giriş Yap</Button>
-          <Button type='primary' onClick={() => navigate('/register')}>Kayıt Ol</Button>
+          <Button type='default' onClick={() => navigate('/login')}>{t('navbar.login')}</Button>
+          <Button type='primary' onClick={() => navigate('/register')}>{t('navbar.register')}</Button>
+          {/* Language Selector */}
+          <div className='language-selector'>
+            <LanguageSelect />
+          </div>
         </div>
 
         {/*  Mobile Menu */}
@@ -57,8 +92,11 @@ const Navbar = ({ pageName }) => {
             ))}
           </ul>
           <div className='mobile-menu-auth'>
-            <Button type='default' onClick={() => navigate('/login')}>Giriş Yap</Button>
-            <Button type='primary' onClick={() => navigate('/register')}>Kayıt Ol</Button>
+            <Button type='default' onClick={() => navigate('/login')}>{t('navbar.login')}</Button>
+            <Button type='primary' onClick={() => navigate('/register')}>{t('navbar.register')}</Button>
+            <div className='language-selector'>
+              <LanguageSelect />
+            </div>
           </div>
         </div>
       </div>
