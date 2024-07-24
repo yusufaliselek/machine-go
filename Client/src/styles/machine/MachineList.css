@@ -162,6 +162,10 @@
   .ant-card {
     width: 300px !important;
   }
+  /* Mobile Bottom Nav */
+  .section-main-pagination {
+    padding-bottom: 60px !important;
+  }
 }
 
 .drawer-filter-main {

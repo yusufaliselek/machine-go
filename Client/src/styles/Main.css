@@ -111,3 +111,9 @@
     padding: 1rem;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .detail-section {
+    padding-bottom: 60px;
+  }
+}

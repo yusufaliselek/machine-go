@@ -79,6 +79,12 @@ h2 {
 }
 
 @media (max-width: 768px) {
+
+  /* Mobile Bottom Nav */
+  .section-main {
+    padding-bottom: 70px;
+  }
+
   .machine-card {
     flex-direction: column;
     align-items: center;
