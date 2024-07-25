@@ -124,11 +124,12 @@ const MachineList = () => {
 
   useEffect(() => {
     getMachines(pagination);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagination]);
 
 
   return (
-    // isLoading ? <Spinner /> :
+    isLoading ? <Spinner /> :
       <Content pageName={t('machineList.pageName')} children={
         <div className='section-main'>
           <div className='section-main-search'>
