@@ -115,11 +115,13 @@ const MachineList = () => {
   }
 
   const clearFilters = () => {
+    setIsLoading(true);
     setCheckedKeys([]);
     setPriceRange({ min: null, max: null });
     setPagination({ ...pagination, page: 1 });
     getMachines(pagination);
     onClose();
+    setIsLoading(false);
   }
 
   useEffect(() => {
