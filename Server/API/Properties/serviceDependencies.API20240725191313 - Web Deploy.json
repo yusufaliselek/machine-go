@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/API20240725191313/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsSqlConnection_E2E25172BE",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/apidbserver-selek/databases/API_db_yusuf",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:SqlConnection",
+      "dynamicId": null
+    }
+  }
+}
