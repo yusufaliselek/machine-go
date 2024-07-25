@@ -1,26 +1,27 @@
 import React from 'react'
 import '../styles/MobileBottomNav.css'
-
-import { HomeOutlined, AppstoreOutlined, UserOutlined, HeartOutlined    } from '@ant-design/icons'
+import { HomeOutlined, AppstoreOutlined, UserOutlined, HeartOutlined } from '@ant-design/icons'
+import { useTranslation } from 'react-i18next';
 
 const MobileBottomNav = () => {
+  const { t } = useTranslation()
   return (
     <div className='mobile-bottom-nav'>
       <div className='mobile-bottom-nav-item'>
         <HomeOutlined style={{ fontSize: "20px" }} />
-        <p>Anasayfa</p>
+        <p>{t('mobileBottomNav.home')}</p>
       </div>
       <div className='mobile-bottom-nav-item'>
         <AppstoreOutlined style={{ fontSize: "20px" }} />
-        <p>Kategoriler</p>
+        <p>{t('mobileBottomNav.categories')}</p>
       </div>
       <div className='mobile-bottom-nav-item'>
         <HeartOutlined style={{ fontSize: "20px" }} />
-        <p>Favoriler</p>
+        <p>{t('mobileBottomNav.favorites')}</p>
       </div>
       <div className='mobile-bottom-nav-item'>
         <UserOutlined style={{ fontSize: "20px" }} />
-        <p>Üye Girişi</p>
+        <p>{t('mobileBottomNav.profile')}</p>
       </div>
     </div>
   )

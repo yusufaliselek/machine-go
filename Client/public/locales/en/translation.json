@@ -104,5 +104,11 @@
   "machineDetail": {
     "cancel": "Go Back",
     "submit": "Rent Now"
+  },
+  "mobileBottomNav": {
+    "home": "Home",
+    "categories": "Categories",
+    "favorites": "Favorites",
+    "profile": "Profile"
   }
 }

@@ -104,5 +104,11 @@
   "machineDetail": {
     "cancel": "Geri Dön",
     "submit": "Şimdi Kirala"
+  },
+  "mobileBottomNav": {
+    "home": "Anasayfa",
+    "categories": "Kategoriler",
+    "favorites": "Favoriler",
+    "profile": "Profil"
   }
 }
